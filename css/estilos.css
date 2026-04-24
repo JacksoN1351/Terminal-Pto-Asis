@@ -1,0 +1,801 @@
+/* ========================================= */
+/* 1. CONFIGURACIÓN GENERAL                  */
+/* ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ========================================= */
+/* 2. HEADER Y COMPONENTES                   */
+/* ========================================= */
+header {
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 4px solid #003366;
+    position: relative;
+}
+
+.logo {
+    width: 130px;
+    margin: 0 auto 10px auto; /* Centrado horizontal del logo */
+    display: block;
+}
+
+header h1 {
+    color: #003366;
+    font-size: 1.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-salir {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #ffc107;
+    color: #000;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    box-shadow: 0 3px 0 #d39e00;
+}
+
+/* ========================================= */
+/* 3. NAVEGACIÓN                             */
+/* ========================================= */
+nav {
+    background-color: #003366;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center; /* Centra los links de navegación */
+    flex-wrap: wrap;
+}
+
+nav ul li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #00509d;
+    color: #ffd700;
+}
+
+/* ========================================= */
+/* 4. CONTENEDOR Y BUSCADOR                  */
+/* ========================================= */
+.contenedor-principal {
+    max-width: 1200px;
+    width: 100%;
+    margin: 30px auto;
+    padding: 0 20px;
+    flex: 1; /* Permite que el contenido empuje el footer al final */
+}
+
+.busqueda-caja {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra elementos internos */
+}
+
+.busqueda-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    width: 100%;
+    max-width: 600px; /* Evita que el buscador sea demasiado ancho */
+}
+
+.busqueda-form input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+}
+
+.btn-buscar {
+    background: #003366;
+    color: white;
+    border: none;
+    padding: 0 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ========================================= */
+/* 5. SECCIONES DE ESTADO (COTIZACIONES)     */
+/* ========================================= */
+.seccion-pendiente {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.seccion-pendiente h3 {
+    color: #003366;
+    border-left: 5px solid #ffc107;
+    padding-left: 15px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.card-reserva {
+    background-color: #e3f2fd;
+    border: 1px solid #90caf9;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reserva-detalle strong {
+    color: #004a99;
+    font-size: 1.1em;
+    display: block;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+/* Alerta unificada (eliminado repetido) */
+.alerta-whatsapp-mini {
+    background-color: #fff9c4;
+    border: 1px dashed #fbc02d;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 0.85em;
+    color: #555;
+    border-radius: 4px;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.alerta-whatsapp-mini::before {
+    content: "⚠️ ";
+}
+
+/* ========================================= */
+/* 6. GRID DE RUTAS                          */
+/* ========================================= */
+.grid-grande {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    justify-content: center; /* Centra las tarjetas si no llenan la fila */
+}
+
+.card-grande {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    text-align: center; /* Centra textos dentro de la card */
+}
+
+.cuerpo-ruta {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.btn-cotizar {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.btn-cotizar:hover { background: #218838; }
+
+/* ========================================= */
+/* 7. TABLAS Y BOTONES                       */
+/* ========================================= */
+.tabla-profesional {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 20px;
+}
+
+.tabla-profesional th {
+    background: #003366;
+    color: white;
+    padding: 12px;
+    text-align: center;
+}
+
+.tabla-profesional td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+.btn-cancelar {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ========================================= */
+/* 8. FOOTER                                 */
+/* ========================================= */
+footer {
+    background: #222;
+    color: #ccc;
+    text-align: center;
+    padding: 30px;
+    margin-top: auto;
+}
+
+/* ========================================= */
+/* 9. RESPONSIVO                             */
+/* ========================================= */
+@media (max-width: 600px) {
+    .busqueda-form {
+        flex-direction: column;
+    }
+
+    .card-reserva {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .btn-salir {
+        position: static;
+        display: block;
+        margin: 10px auto;
+        width: fit-content;
+    }
+}
+/* 1. Reset y Body */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 2. Header (Alineado a la izquierda o según su diseño original) */
+header {
+    background-color: #ffffff;
+    padding: 20px;
+    border-bottom: 4px solid #003366;
+    /* Quitamos el text-align center si quieres que sea natural */
+}
+
+/* 3. El Contenedor de Login (ESTO ES LO QUE SE CENTRA) */
+.login-container {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    
+    width: 90%;
+    max-width: 400px; /* Ancho del cuadro */
+    
+    /* El truco del centrado solo para el cuerpo */
+    margin: auto; 
+    
+    text-align: left; /* Contenido del formulario alineado a la izquierda */
+}
+
+/* 4. Formulario dentro del cuadro */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.login-form input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    width: 100%;
+}
+
+.btn-cliente {
+    background-color: #003366;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* 5. Footer (Pie de página normal) */
+footer {
+    background: #222;
+    color: #ccc;
+    padding: 20px;
+    margin-top: auto; /* Se queda al final */
+}
+/* Centrado de la sección Nosotros */
+.contenedor-texto {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinea la caja hacia arriba con un margen */
+    padding: 60px 20px;
+    min-height: 80vh;
+    background-color: #f4f4f4; /* Un fondo gris suave para que resalte la caja blanca */
+}
+
+.caja-blanca {
+    max-width: 850px;
+    width: 100%;
+    background: #ffffff;
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.caja-blanca h2 {
+    color: #003366;
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+/* Opcional: una línea decorativa bajo el título */
+.caja-blanca h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #27ae60;
+}
+
+.caja-blanca p {
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 25px;
+    font-size: 1.15rem;
+    text-align: justify;
+}
+/* Reutilizamos el contenedor de centrado */
+.contenedor-flexible {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+    min-height: 80vh;
+}
+
+/* El cuadro blanco principal */
+.caja-empresas {
+    max-width: 1000px;
+    width: 100%;
+    background: #ffffff;
+    padding: 45px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.caja-empresas h2 {
+    color: #003366;
+    margin-bottom: 40px;
+    font-size: 2.2rem;
+}
+
+/* Grid de logos dentro de la caja */
+.grid-logos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    justify-items: center;
+    align-items: center;
+}
+
+/* Estilo para cada card de empresa */
+.card-empresa-publica {
+    background: #fdfdfd;
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+}
+
+.card-empresa-publica:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.card-empresa-publica img {
+    max-width: 100%;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.nombre-aliado {
+    font-weight: bold;
+    color: #003366;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+/* Reutilizamos el centrado */
+.contenedor-texto {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+    min-height: 80vh;
+}
+
+/* El cuadro blanco centrado */
+.caja-contacto {
+    max-width: 800px;
+    width: 100%;
+    background: #ffffff;
+    padding: 45px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.caja-contacto h2 {
+    color: #003366;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.info-p {
+    font-size: 1.15rem;
+    color: #444;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+/* Botón de WhatsApp estilizado */
+.whatsapp-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 15px 30px;
+    background-color: #25d366;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-link:hover {
+    background-color: #128c7e;
+    color: white;
+}
+
+/* Contenedor del mapa para que no rompa el diseño */
+.mapa-contenedor iframe {
+    width: 100%;
+    height: 350px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    margin-top: 25px;
+}
+/* Contenedor principal centrado */
+.contenedor-flexible {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+    min-height: 80vh;
+}
+
+/* El cuadro blanco que rodea todo */
+.caja-empresas {
+    max-width: 1100px; /* Un poco más ancho para el grid */
+    width: 100%;
+    background: #ffffff;
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.caja-empresas h2 {
+    color: #003366;
+    margin-bottom: 40px;
+    font-size: 2.2rem;
+}
+
+/* Grid de logos mejorado */
+.grid-logos {
+    display: grid;
+    /* Aumentamos el tamaño mínimo de la columna a 280px */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    justify-items: center;
+    align-items: stretch;
+}
+
+/* Tarjeta de empresa individual */
+.card-empresa-publica {
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    padding: 35px; /* Más aire interno */
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-empresa-publica:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+    border-color: #27ae60;
+}
+
+/* Ajuste de los logos: Más grandes y claros */
+.card-empresa-publica img {
+    width: 100%;
+    max-width: 220px; /* Aumentamos el ancho máximo */
+    height: 120px;    /* Aumentamos la altura visual */
+    object-fit: contain; /* Evita que el logo se deforme */
+    margin-bottom: 20px;
+}
+
+.nombre-aliado {
+    font-weight: bold;
+    color: #003366;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+/* Contenedor principal para centrar el cuerpo */
+.contenedor-vehiculos {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+    min-height: 80vh;
+}
+
+/* El cuadro blanco que rodea el contenido */
+.caja-blanca-vehiculos {
+    max-width: 1100px;
+    width: 100%;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.caja-blanca-vehiculos h2 {
+    color: #003366;
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+}
+
+/* Grid para que las fotos se vean grandes */
+.grid-vehiculos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* Tarjeta de vehículo */
+.card-vehiculo-publico {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    overflow: hidden; /* Corta la imagen sobrante de los bordes redondeados */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-vehiculo-publico:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+}
+
+/* AJUSTE DE IMAGEN: Fotos grandes y bien encuadradas */
+.card-vehiculo-publico img {
+    width: 100%;
+    height: 250px; /* Altura generosa para que luzcan los vehículos */
+    object-fit: cover; /* Clave: llena el espacio sin estirar la foto */
+    display: block;
+}
+
+/* Etiqueta azul con el nombre del vehículo */
+.info-vehiculo {
+    padding: 20px;
+    background: #003366;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+/* Contenedor principal para centrado */
+.contenedor-destinos {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+    min-height: 80vh;
+}
+
+/* Cuadro blanco unificado */
+.caja-blanca-destinos {
+    max-width: 1100px;
+    width: 100%;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.caja-blanca-destinos h2 {
+    color: #003366;
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+}
+
+/* Grid para tarjetas de destino */
+.grid-destinos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* Tarjeta de Destino */
+.card-destino-publico {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.card-destino-publico:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+}
+
+/* Imagen del destino: Grande y envolvente */
+.card-destino-publico img {
+    width: 100%;
+    height: 250px; 
+    object-fit: cover;
+    display: block;
+}
+
+/* Etiqueta con el nombre del destino */
+.info-destino-nombre {
+    padding: 20px;
+    background: #003366;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+/* Contenedor principal centrado */
+.contenedor-flexible {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+    min-height: 80vh;
+}
+
+/* Caja blanca unificada */
+.caja-empresas {
+    max-width: 1100px;
+    width: 100%;
+    background: #ffffff;
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.caja-empresas h2 {
+    color: #003366;
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+}
+
+/* Grid de logos ajustado */
+.grid-logos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    justify-items: center;
+}
+
+/* Tarjeta individual de empresa */
+.card-empresa-publica {
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    padding: 35px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-empresa-publica:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+    border-color: #27ae60;
+}
+
+/* Logos más grandes y definidos */
+.card-empresa-publica img {
+    width: 100%;
+    max-width: 220px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.05));
+}
+
+.nombre-aliado {
+    font-weight: bold;
+    color: #003366;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
